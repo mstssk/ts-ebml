@@ -43,21 +43,6 @@ export declare function makeMetadataSeekable(originalMetadata: EBML.EBMLElementD
     CueTime: number;
 }[]): ArrayBuffer;
 /**
- * print all element id names in a list
-
- * @param metadata - array of EBML elements to print
- *
-export function printElementIds(metadata: EBML.EBMLElementBuffer[]) {
-
-  let result: EBML.EBMLElementBuffer[] = [];
-  let start: number = -1;
-
-  for (let i = 0; i < metadata.length; i++) {
-    console.error("\t id: " + metadata[i].name);
-  }
-}
-*/
-/**
  * remove all occurances of an EBML element from an array of elements
  * If it's a MasterElement you will also remove the content. (everything between start and end)
  * @param idName - name of the EBML Element to remove.
@@ -71,29 +56,6 @@ export declare function removeElement(idName: string, metadata: EBML.EBMLElement
  * @param metadata - array of EBML elements to search
  */
 export declare function extractElement(idName: string, metadata: EBML.EBMLElementBuffer[]): EBML.EBMLElementBuffer[];
-/**
- * @deprecated
- * metadata に対して duration と seekhead を追加した metadata を返す
- * @param metadata - 変更前の webm における ファイル先頭から 最初の Cluster 要素までの 要素
- * @param duration - Duration (TimecodeScale)
- * @param cues - cue points for clusters
- * @deprecated @param clusterPtrs - 変更前の webm における SeekHead に追加する Cluster 要素 への start pointer
- * @deprecated @param cueInfos - please use cues.
- */
-export declare function putRefinedMetaData(metadata: EBML.EBMLElementDetail[], info: {
-    duration?: number;
-    cues?: {
-        CueTrack: number;
-        CueClusterPosition: number;
-        CueTime: number;
-    }[];
-    clusterPtrs?: number[];
-    cueInfos?: {
-        CueTrack: number;
-        CueClusterPosition: number;
-        CueTime: number;
-    }[];
-}): ArrayBuffer;
 export declare function concat(list: Buffer[]): Buffer;
 export declare function encodeValueToBuffer(elm: EBML.MasterElement): EBML.MasterElement;
 export declare function encodeValueToBuffer(elm: EBML.ChildElementsValue): EBML.ChildElementBuffer;
