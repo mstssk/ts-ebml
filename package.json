@@ -20,7 +20,8 @@
     "examples_bsd": "tsc && for file in `find lib -name 'example_*.js' -type f -print` && do browserify lib/$(basename $file) -o test/$(basename $file) && done",
     "check": "tsc -w --noEmit -p ./",
     "lint": "tslint -c ./tslint.json --project ./tsconfig.json --type-check",
-    "doc": "typedoc --mode modules --out doc --disableOutputCheck"
+    "doc": "typedoc --mode modules --out doc --disableOutputCheck",
+    "fmt": "npx prettier --write ./src"
   },
   "repository": {
     "type": "git",

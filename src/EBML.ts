@@ -1,18 +1,28 @@
-import {Buffer} from "./tools";
-export type ChildElementsValue = NumberElement | StringElement | BinaryElement | DateElement;
+import { Buffer } from "./tools";
+export type ChildElementsValue =
+  | NumberElement
+  | StringElement
+  | BinaryElement
+  | DateElement;
 export type EBMLElementValue = MasterElement | ChildElementsValue;
-export type ChildElementBuffer = ChildElement & {data: Buffer};
+export type ChildElementBuffer = ChildElement & { data: Buffer };
 export type EBMLElementBuffer = MasterElement | ChildElementBuffer;
-export type EBMLElementBufferValue = MasterElement | (ChildElementsValue & {data: Buffer});
-export type EBMLElementDetail = (MasterElement | (ChildElementsValue & {data: Buffer}) ) & ElementDetail;
+export type EBMLElementBufferValue =
+  | MasterElement
+  | (ChildElementsValue & { data: Buffer });
+export type EBMLElementDetail = (
+  | MasterElement
+  | (ChildElementsValue & { data: Buffer })
+) &
+  ElementDetail;
 
 export interface IElement {
   name: string;
-  type: "m"|"u"|"i"|"f"|"s"|"8"|"b"|"d";
+  type: "m" | "u" | "i" | "f" | "s" | "8" | "b" | "d";
 }
 
 export interface ChildElement extends IElement {
-  type: "u"|"i"|"f"|"s"|"8"|"b"|"d";
+  type: "u" | "i" | "f" | "s" | "8" | "b" | "d";
 }
 
 export interface MasterElement extends IElement {
@@ -46,9 +56,8 @@ export interface DateElement extends ChildElementValue {
    * Date - signed 8 octets integer in nanoseconds with 0 indicating the precise
    * beginning of the millennium (at 2001-01-01T00:00:00,000000000 UTC)
    */
-  value: Date; 
+  value: Date;
 }
-
 
 export interface ElementDetail {
   schema: Schema;
@@ -57,8 +66,8 @@ export interface ElementDetail {
    */
   EBML_ID: string;
   /**
-   * The level within an EBML tree that the element may occur at. 
-   * + is for a recursive level (can be its own child). 
+   * The level within an EBML tree that the element may occur at.
+   * + is for a recursive level (can be its own child).
    * g: global element (can be found at any level)
    */
   level: number;
