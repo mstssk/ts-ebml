@@ -4,8 +4,7 @@
  * remove DefaultDuration demo
  */
 
-import * as EBML from "./";
-import { Decoder, Encoder, Reader, tools } from "./";
+import { Decoder, Encoder, Reader } from "./";
 
 async function main() {
   const logging = true;

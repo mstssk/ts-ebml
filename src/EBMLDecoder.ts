@@ -1,4 +1,4 @@
-import { Buffer, readVint, ebmlBlock, convertEBMLDateToJSDate } from "./tools";
+import { Buffer, readVint, convertEBMLDateToJSDate } from "./tools";
 import { Int64BE } from "int64-buffer";
 import * as EBML from "./EBML";
 import * as tools from "./tools";

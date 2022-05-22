@@ -1,5 +1,4 @@
-import * as EBML from "./";
-import { Decoder, Encoder, tools, Reader } from "./";
+import { Decoder, tools, Reader } from "./";
 
 async function main() {
   const params = new URLSearchParams(location.search);
