@@ -284,6 +284,10 @@ export default class EBMLReader extends EventEmitter {
       this.lastClusterTimecode = elm.value;
     } else if (elm.type === "u" && elm.name === "TimecodeScale") {
       this.timecodeScale = elm.value;
+    } else if (elm.type === "u" && elm.name === "Timestamp") {
+      this.lastClusterTimecode = elm.value; // Use "Timestamp" instead of Timecode in matroska v4
+    } else if (elm.type === "u" && elm.name === "TimestampScale") {
+      this.timecodeScale = elm.value; // Use "TimestampScale" instead of TimecodeScale in matroska v4
     } else if (elm.type === "m" && elm.name === "TrackEntry") {
       if (elm.isEnd) {
         this.trackTypes[this.currentTrack.TrackNumber] =

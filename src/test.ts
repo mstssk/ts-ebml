@@ -178,11 +178,11 @@ QUnit.test("handwrite-encoder", async (assert: Assert) => {
     { name: "SeekHead", type: "m", isEnd: false },
     { name: "SeekHead", type: "m", isEnd: true },
     { name: "Info", type: "m", isEnd: false },
-    { name: "TimecodeScale", type: "u", value: 1000000 },
+    { name: "TimestampScale", type: "u", value: 1000000 },
     { name: "Info", type: "m", isEnd: true },
     { name: "Duration", type: "f", value: 0.0 },
     { name: "Cluster", type: "m", unknownSize: true, isEnd: false },
-    { name: "Timecode", type: "u", value: 1 },
+    { name: "Timestamp", type: "u", value: 1 },
     { name: "SimpleBlock", type: "b", value: new Buffer(1024) },
   ];
   const binarized = tagStream.map(tools.encodeValueToBuffer);
@@ -206,6 +206,7 @@ QUnit.test("handwrite-encoder", async (assert: Assert) => {
 QUnit.module("Reader");
 
 const MEDIA_RECORDER_WEBM_FILE_LIST = [
+  "./chrome101.webm",
   "./chrome57.webm",
   // last2timecode(video, audio): ((7.493s, 7.552s), (7.493s, 7.552s))
   // Chrome57: 7.612s ~= 7.611s = 7.552s + (7.552s - 7.493s) // ???
@@ -233,7 +234,10 @@ function create_webp_test(file: string) {
     const res = await fetch(file);
     const webm_buf = await res.arrayBuffer();
     const elms = new Decoder().decode(webm_buf);
-    const WebPs = tools.WebPFrameFilter(elms);
+    const WebPs = tools.WebPFrameFilter(elms); // XXX: Only for VP8 video currently. VP9 is not supported.
+
+    // If `file` is VP9 format, WebPFrameFilter func returns empty array.
+    assert.ok(WebPs.length > 0);
 
     for (const WebP of WebPs) {
       const src = URL.createObjectURL(WebP);
@@ -380,6 +384,7 @@ function create_recorder_helper_test(file: string) {
         (elm) =>
           elm.name === "Cluster" ||
           elm.name === "Timecode" ||
+          elm.name === "Timestamp" ||
           elm.name === "SimpleBlock"
       );
       assert.ok(assertion, "element check");

@@ -15,6 +15,7 @@
     "browserify": "browserify lib/index.js --standalone EBML -o dist/EBML.js",
     "watchify": "watchify lib/index.js --standalone EBML -o dist/EBMl.js -v",
     "test": "tsc && espower lib/test.js > lib/test.tmp && mv -f lib/test.tmp lib/test.js && browserify lib/test.js -o test/test.js",
+    "test-html": "npx live-server ./test --entry-file=test.html",
     "example": "tsc && browserify lib/example_seekable.js -o test/example_seekable.js",
     "examples": "tsc && for file in `find lib -name 'example_*.js' -type f -printf '%f\\n'` && do browserify lib/$file -o test/$file && done",
     "examples_bsd": "tsc && for file in `find lib -name 'example_*.js' -type f -print` && do browserify lib/$(basename $file) -o test/$(basename $file) && done",
