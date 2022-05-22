@@ -1,5 +1,9 @@
 /// <reference types="qunit"/>
-import EBML, { Decoder, Encoder, Reader } from "./";
+// import EBML, { Decoder, Encoder, Reader } from "./";
+import * as EBML from "./EBML";
+import Decoder from "./EBMLDecoder";
+import Encoder from "./EBMLEncoder";
+import Reader from "./EBMLReader";
 import { tools } from "./";
 
 const Buffer = tools.Buffer;

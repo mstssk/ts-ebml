@@ -3,10 +3,11 @@
 /// <reference types="commander"/>
 import { Decoder, Encoder, Reader, tools } from "./";
 import com = require("commander");
+import { program } from "commander";
 import fs = require("fs");
 const version = require("../package.json").version;
 
-com
+program
   .version(version)
   .usage("[options] <*.webm>")
   .option(
@@ -22,13 +23,14 @@ com
   .arguments("<*.webm>")
   .parse(process.argv);
 
-const { args } = com;
+const { args } = program;
+const options = program.opts();
 
 if (args.length < 1) {
   process.exit();
 }
 
-if (com.seekable) {
+if (options.seekable) {
   const decoder = new Decoder();
   const reader = new Reader();
   reader.logging = false;
@@ -49,7 +51,7 @@ if (com.seekable) {
     tools.concat([new Buffer(refinedMetadataBuf), body]).buffer
   );
   process.stdout.write(refined);
-} else if (com.keyframe) {
+} else if (options.keyframe) {
   const decoder = new Decoder();
   let TrackType = -1;
   let TrackNumber = -1;
@@ -57,7 +59,7 @@ if (com.seekable) {
   const trackTypes = {} as {
     [TrackNumber: number]: { TrackType: number; CodecID: string };
   };
-  fs.createReadStream(args[0]).on("data", (buf) => {
+  fs.createReadStream(args[0]).on("data", (buf: Buffer) => {
     const ebmlElms = decoder.decode(buf);
     ebmlElms.forEach((elm) => {
       if (elm.type === "m" && elm.name === "TrackEntry" && elm.isEnd) {
@@ -87,7 +89,7 @@ if (com.seekable) {
   });
 } else {
   const decoder = new Decoder();
-  fs.createReadStream(args[0]).on("data", (buf) => {
+  fs.createReadStream(args[0]).on("data", (buf: Buffer) => {
     // put ebml info
     const ebmlElms = decoder.decode(buf);
     ebmlElms.forEach((elm) => {

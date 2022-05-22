@@ -1,6 +1,6 @@
 /// <reference types="node" />
 import { EventEmitter } from "events";
-import * as EBML from './EBML';
+import * as EBML from "./EBML";
 /**
  * This is an informal code for reference.
  * EBMLReader is a class for getting information to enable seeking Webm recorded by MediaRecorder.
@@ -59,7 +59,7 @@ export default class EBMLReader extends EventEmitter {
     /**
      * emit chunk info
      */
-    private emit_segment_info();
+    private emit_segment_info;
     read(elm: EBML.EBMLElementDetail): void;
     /**
      * DefaultDuration が定義されている場合は最後のフレームのdurationも考慮する
@@ -71,12 +71,12 @@ export default class EBMLReader extends EventEmitter {
      * const sec = nanosec / 1000 / 1000 / 1000;
      * ```
      */
-    readonly duration: number;
+    get duration(): number;
     /**
      * @deprecated
      * emit on every segment
      * https://www.matroska.org/technical/specs/notes.html#Position_References
-    */
+     */
     addListener(event: "segment_offset", listener: (ev: number) => void): this;
     /**
      * @deprecated
