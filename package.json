@@ -20,7 +20,6 @@
     "examples_bsd": "tsc && for file in `find lib -name 'example_*.js' -type f -print` && do browserify lib/$(basename $file) -o test/$(basename $file) && done",
     "check": "tsc -w --noEmit -p ./",
     "lint": "tslint -c ./tslint.json --project ./tsconfig.json --type-check",
-    "doc": "typedoc --mode modules --out doc --disableOutputCheck",
     "fmt": "npx prettier --write ./src"
   },
   "repository": {
@@ -42,7 +41,6 @@
   "homepage": "https://github.com/legokichi/ts-ebml#readme",
   "dependencies": {
     "buffer": "^5.0.7",
-    "commander": "^9.2.0",
     "ebml": "^2.2.1",
     "ebml-block": "^1.1.0",
     "events": "^1.1.1",
@@ -60,11 +58,9 @@
     "qunit-tap": "^1.5.1",
     "qunitjs": "^2.0.1",
     "tslint": "^5.13.1",
-    "typedoc": "^0.22.15",
     "typescript": "^3.3.3333",
     "watchify": "^4.0.0"
   },
-  "bin": "./lib/cli.js",
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts"
 }
