@@ -2,12 +2,10 @@
 import { Int64BE, Uint64BE } from "int64-buffer";
 import * as EBML from "./EBML";
 import Encoder from "./EBMLEncoder";
-import _Buffer = require("buffer/");
 import _tools = require("ebml/lib/ebml/tools");
 import _block = require("ebml-block");
 
-// @ts-expect-error
-export const Buffer: typeof global.Buffer = _Buffer.Buffer;
+export const Buffer: typeof global.Buffer = require("buffer/").Buffer;
 
 export const readVint: (
   buffer: Buffer,
